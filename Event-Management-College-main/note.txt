@@ -1,0 +1,709 @@
+import Logo2 from "../../assets/logo2.png";
+import { useState } from "react";
+import { CiUser } from "react-icons/ci";
+import { HiOutlineMenu, HiX } from "react-icons/hi";
+import { motion, AnimatePresence } from "framer-motion"; // 👈 Added Framer Motion
+import { Link, useNavigate } from "react-router-dom";
+// import Logo2 from "../assets/logo2.png"
+export function NavBar() {
+  const [mobileView, setMobileView] = useState(false);
+
+  const navigate = useNavigate();
+
+  return (
+    <nav className="absolute top-0 left-0 w-full z-50">
+      <div className=" max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-10 flex-wrap">
+        <div className="flex items-center justify-between w-full flex-wrap pt-4">
+          {/* Logo Section */}
+          <div className="flex items-center w-[205px] h-[70px]">
+            <div className="flex items-center h-[66px]">
+              <img src={Logo2} alt="Logo" className="w-[50px]" />
+            </div>
+            <div className="flex items-center justify-center">
+              <h2 className="font-sans font-bold text-white text-[27px]">
+                DOCKET
+              </h2>
+            </div>
+          </div>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center justify-between w-[900px] flex-row flex-wrap">
+            <div className="flex items-center justify-center gap-8 px-8 py-4 flex-row w-[680px] h-auto flex-wrap bg-slate-600 backdrop-blur-sm border border-gray-600 rounded-2xl shadow-2xl shadow-purple-500/20">
+              <div className="group cursor-pointer relative">
+                <Link
+                  to="/"
+                  className="font-sans font-medium text-white text-[16px] transition-colors group-hover:text-purple-300"
+                >
+                  Home
+                </Link>
+                <div className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300 rounded-full" />
+              </div>
+              <div className="group cursor-pointer relative">
+                <h3 className="font-sans font-medium text-white text-[16px] transition-colors group-hover:text-purple-300">
+                  About Us
+                </h3>
+                <div className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300 rounded-full" />
+              </div>
+              <div className="group cursor-pointer relative">
+                <h3 className="font-sans font-medium text-white text-[16px] transition-colors group-hover:text-purple-300">
+                  Events
+                </h3>
+                <div className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300 rounded-full" />
+              </div>
+              <div className="group cursor-pointer relative">
+                <h3 className="font-sans font-medium text-white text-[16px] transition-colors group-hover:text-purple-300">
+                  Gallery
+                </h3>
+                <div className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300 rounded-full" />
+              </div>
+            </div>
+           <div
+  onClick={() => navigate("/login")}
+  className="
+    relative flex items-center justify-center gap-2
+    px-6 py-2.5 h-[40px]
+    bg-blue-600 hover:bg-blue-700
+    text-white rounded-lg
+    font-medium
+    transition-all duration-200
+    cursor-pointer
+    shadow-md hover:shadow-lg
+  "
+>
+  <h3 className="font-sans text-[16px]">
+    Login
+  </h3>
+  <CiUser className="text-xl transition-transform group-hover:scale-105" />
+</div>
+
+          </div>
+
+          {/* Mobile Menu Icon */}
+          <div className="flex md:hidden items-center justify-center text-white">
+            {mobileView ? (
+              <HiX
+                className="text-3xl cursor-pointer"
+                onClick={() => setMobileView(false)}
+              />
+            ) : (
+              <HiOutlineMenu
+                className="text-3xl cursor-pointer"
+                onClick={() => setMobileView(true)}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu (Animated) */}
+        <AnimatePresence>
+          {mobileView && (
+            <motion.div
+              key="mobileMenu"
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
+              transition={{ type: "spring", stiffness: 80, damping: 20 }}
+              className="fixed top-0 right-0 w-2/3 h-full bg-black shadow-lg z-50 md:hidden flex flex-col"
+            >
+              <div className="flex justify-end p-4">
+                <HiX
+                  className="text-white text-3xl cursor-pointer"
+                  onClick={() => setMobileView(false)}
+                />
+              </div>
+
+              <div className="flex flex-col space-y-2 text-white font-semibold text-lg px-6">
+                <h1 className="py-2 border-b border-gray-700 hover:bg-gray-800 rounded px-2 cursor-pointer transition">
+                  Home
+                </h1>
+                <h1 className="py-2 border-b border-gray-700 hover:bg-gray-800 rounded px-2 cursor-pointer transition">
+                  About Us
+                </h1>
+                <h1 className="py-2 border-b border-gray-700 hover:bg-gray-800 rounded px-2 cursor-pointer transition">
+                  Events
+                </h1>
+                <h1 className="py-2 border-b border-gray-700 hover:bg-gray-800 rounded px-2 cursor-pointer transition">
+                  Gallery
+                </h1>
+              </div>
+
+              <div className="mt-auto p-6">
+                <Link
+                  to="/login"
+                  className="w-full py-2 px-4 text-black bg-white font-semibold rounded hover:bg-gray-100 transition flex items-center justify-center"
+                >
+                  Login
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </nav>
+  );
+}
+/////////////////////////////////////////////////////////////////////////////
+
+export const EVENTDATAS = [
+  {
+    id: 1,
+    programName: "Hackathon",
+    eventName: "24 Hour Coding Challenge",
+    description:
+      "A high-intensity 24-hour hackathon where teams collaborate to design, develop, and deploy innovative real-world solutions. Participants will brainstorm ideas, build functional prototypes, and present their projects to a panel of experts. This challenge tests problem-solving skills, coding efficiency, teamwork, and creativity under time pressure.",
+    date: "2025-03-18",
+    startTime: "09:00",
+    endTime: "09:00",
+    venue: "Block A Exhibition Hall",
+    latitude: 11.2588,
+    longitude: 75.7804,
+    incharge: "Dr. Arun Kumar",
+    department: "Computer Science",
+    limit: 120,
+    image: img13,
+  },
+
+  {
+    id: 2,
+    programName: "Tech Meetup",
+    eventName: "Future of Web Technologies",
+    description:
+      "An expert-led technical meetup focusing on the future of web development. The session covers modern frontend frameworks, backend scalability, cloud deployment, and emerging trends such as AI-powered web applications. Participants will gain industry insights, real-world use cases, and opportunities to interact with experienced professionals.",
+    date: "2025-04-05",
+    startTime: "10:00",
+    endTime: "13:00",
+    venue: "Seminar Hall 1",
+    latitude: 11.2595,
+    longitude: 75.7812,
+    incharge: "Ms. Sneha Raj",
+    department: "Information Technology",
+    limit: 80,
+    image: img20,
+  },
+
+  {
+    id: 3,
+    programName: "Design Sprint",
+    eventName: "UI/UX Design Workshop",
+    description:
+      "A hands-on UI/UX design workshop aimed at teaching user-centered design principles. Participants will learn wireframing, prototyping, usability testing, and visual design fundamentals. The workshop includes practical exercises, team activities, and expert feedback to help students create intuitive and engaging digital experiences.",
+    date: "2025-04-20",
+    startTime: "11:00",
+    endTime: "16:00",
+    venue: "Innovation Lab",
+    latitude: 11.2579,
+    longitude: 75.7798,
+    incharge: "Mr. Rahul Menon",
+    department: "Design & Media",
+    limit: 60,
+    image: img21,
+  },
+
+  {
+    id: 4,
+    programName: "Hackathon",
+    eventName: "AI Model Building Contest",
+    description:
+      "A competitive event where participants design and train intelligent AI models to solve predefined problem statements. The contest focuses on data preprocessing, model selection, training optimization, and performance evaluation. Teams will present their solutions, demonstrating innovation, accuracy, and real-world applicability.",
+    date: "2025-05-02",
+    startTime: "09:30",
+    endTime: "17:30",
+    venue: "Computer Lab 2",
+    latitude: 11.2601,
+    longitude: 75.7825,
+    incharge: "Mr. Faisal Khan",
+    department: "Artificial Intelligence",
+    limit: 50,
+    image: img22,
+  },
+
+  {
+    id: 5,
+    programName: "Design Sprint",
+    eventName: "Community Innovation Drive",
+    description:
+      "A collaborative innovation drive where students work together to identify and solve real-world community challenges. Participants will engage in research, ideation, and solution development focused on social impact. The event encourages creative thinking, teamwork, and socially responsible innovation.",
+    date: "2025-05-15",
+    startTime: "10:00",
+    endTime: "14:00",
+    venue: "City Park",
+    latitude: 11.2590,
+    longitude: 75.7819,
+    incharge: "Ms. Anjali Varma",
+    department: "Social Sciences",
+    limit: 100,
+    image: img11,
+  },
+
+  {
+    id: 6,
+    programName: "Hackathon",
+    eventName: "AI Innovation Challenge",
+    description:
+      "A 24-hour hackathon focused on building AI-powered solutions for real-world problems. Participants will work on problem analysis, data modeling, algorithm design, and prototype implementation. The challenge emphasizes innovation, practical AI usage, and teamwork under time constraints.",
+    date: "2025-06-05",
+    startTime: "09:00",
+    endTime: "09:00",
+    venue: "Innovation Lab",
+    latitude: 11.2585,
+    longitude: 75.7802,
+    incharge: "Mr. Rahul Menon",
+    department: "Computer Science",
+    limit: 80,
+    image: img23,
+  },
+
+  {
+    id: 7,
+    programName: "Tech Meetup",
+    eventName: "Web Development Bootcamp",
+    description:
+      "An intensive hands-on bootcamp covering modern web development technologies. Participants will learn frontend and backend concepts, build responsive applications, and explore best practices used in the industry. The bootcamp is designed for skill enhancement through practical implementation.",
+    date: "2025-06-12",
+    startTime: "10:00",
+    endTime: "16:00",
+    venue: "Seminar Hall 2",
+    latitude: 11.2601,
+    longitude: 75.7825,
+    incharge: "Ms. Neha Thomas",
+    department: "Information Technology",
+    limit: 60,
+    image: img13,
+  },
+
+  {
+    id: 8,
+    programName: "Design Sprint",
+    eventName: "UI/UX Design Workshop",
+    description:
+      "A practical design workshop focused on user-centered design methodologies. Participants will learn design thinking, wireframing, prototyping, and usability testing. The session encourages creativity and provides real-world design challenges to enhance design skills.",
+    date: "2025-06-20",
+    startTime: "11:00",
+    endTime: "15:00",
+    venue: "Design Studio",
+    latitude: 11.2579,
+    longitude: 75.7796,
+    incharge: "Mr. Arjun Nair",
+    department: "Design",
+    limit: 50,
+    image: img13,
+  },
+
+  {
+    id: 9,
+    programName: "Hackathon",
+    eventName: "Smart Campus Hack",
+    description:
+      "A hackathon dedicated to building smart solutions that enhance campus life. Participants will work on ideas related to sustainability, automation, security, and student experience. Teams will prototype innovative solutions that can be practically implemented within a campus environment.",
+    date: "2025-07-01",
+    startTime: "09:00",
+    endTime: "18:00",
+    venue: "Main Auditorium",
+    latitude: 11.2612,
+    longitude: 75.7831,
+    incharge: "Dr. Suresh Kumar",
+    department: "Engineering",
+    limit: 100,
+    image: img14,
+  },
+
+  {
+    id: 10,
+    programName: "Tech Meetup",
+    eventName: "Cyber Security Awareness Program",
+    description:
+      "An informative session aimed at spreading awareness about cyber security threats and digital safety practices. Topics include common cyber attacks, data protection, secure online behavior, and best practices for personal and organizational security. The program is suitable for beginners and professionals alike.",
+    date: "2025-07-10",
+    startTime: "14:00",
+    endTime: "17:00",
+    venue: "Conference Hall",
+    latitude: 11.2594,
+    longitude: 75.7810,
+    incharge: "Ms. Priya Nandakumar",
+    department: "Computer Applications",
+    limit: 120,
+    image: img16,
+  }
+];
+//////////////////////////////////////////////////////////
+
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { EVENTDATAS } from "../../Constants/ProgramData";
+import { BiLocationPlus } from "react-icons/bi";
+import { FaLocationDot } from "react-icons/fa6";
+
+const EventDetails = () => {
+  const { id } = useParams();
+  const navigate = useNavigate(); // ✅ added
+  const [event, setEvent] = useState(null);
+
+  useEffect(() => {
+    const foundEvent = EVENTDATAS.find((e) => e.id === Number(id));
+    setEvent(foundEvent);
+  }, [id]);
+
+  // ✅ UPDATED: redirect instead of alert
+  const handleRegister = () => {
+    navigate(`/event/${event.id}/register`);
+  };
+
+  if (!event) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#020617] text-gray-400">
+        Loading event...
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#020617] text-white pt-20 pb-20 px-5">
+      <div className="max-w-7xl mx-auto">
+
+        {/* ================= HERO ================= */}
+        <div className="relative rounded-3xl overflow-hidden mb-16 mt-20">
+          <img
+            src={event.poster}
+            alt={event.eventName}
+            className="w-full h-[420px] object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+
+          <div className="absolute bottom-10 left-8 max-w-3xl">
+            <p className="text-blue-400 font-bold uppercase tracking-wide text-xl">
+              {event.programName}
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold mt-2">
+              {event.eventName}
+            </h1>
+            <p className="text-gray-300 mt-4">
+              {event.description}
+            </p>
+          </div>
+        </div>
+
+        {/* ================= CONTENT ================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+          {/* LEFT CONTENT */}
+          <div className="lg:col-span-2 space-y-10">
+
+            {/* ABOUT */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <h2 className="text-2xl font-semibold mb-4">About This Event</h2>
+              <p className="text-gray-300 leading-relaxed">
+                This event is organized by the {event.department} department and
+                coordinated by {event.incharge}. Participants will gain hands-on
+                experience and exposure to real-world challenges.
+              </p>
+            </section>
+
+            {/* EVENT DETAILS */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <h2 className="text-2xl font-semibold mb-6">Event Details</h2>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <Detail label="Date" value={event.date} />
+                <Detail
+                  label="Time"
+                  value={`${event.startTime} - ${event.endTime}`}
+                />
+                <Detail label="Venue" value={event.venue} />
+                <Detail label="Participant Limit" value={event.limit} />
+              </div>
+            </section>
+
+            {/* LOCATION */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <h2 className="text-2xl font-semibold">Location</h2>
+                <FaLocationDot className="text-xl text-blue-500" />
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-10 text-gray-300 mb-6">
+                <Detail label="Latitude" value={event.latitude} />
+                <Detail label="Longitude" value={event.longitude} />
+              </div>
+
+              {/* GOOGLE MAP LINK */}
+              <a
+                href={`https://www.google.com/maps?q=${event.latitude},${event.longitude}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  inline-flex items-center gap-2
+                  px-5 py-3
+                  rounded-xl
+                  bg-blue-600/20 text-blue-400
+                  border border-blue-500/30
+                  hover:bg-blue-600/30
+                  hover:text-blue-300
+                  transition
+                "
+              >
+                <BiLocationPlus className="text-lg" />
+                Open Location in Google Maps
+              </a>
+            </section>
+          </div>
+
+          {/* RIGHT STICKY CARD */}
+          <div className="relative">
+            <div className="sticky top-28 bg-gradient-to-br from-[#1E293B] to-[#020617] border border-white/10 rounded-3xl p-8 space-y-6 shadow-xl">
+
+              <h3 className="text-2xl font-semibold">
+                Ready to Join?
+              </h3>
+
+              <div className="space-y-3 text-gray-300 text-sm">
+                <p>
+                  <span className="text-gray-400">Department:</span>{" "}
+                  {event.department}
+                </p>
+                <p>
+                  <span className="text-gray-400">In-charge:</span>{" "}
+                  {event.incharge}
+                </p>
+                <p>
+                  <span className="text-gray-400">Venue:</span>{" "}
+                  {event.venue}
+                </p>
+              </div>
+
+              <button
+                onClick={handleRegister}
+                className="
+                  w-full py-4 rounded-xl
+                  bg-gradient-to-r from-blue-500 to-indigo-600
+                  font-semibold text-lg
+                  hover:scale-[1.02]
+                  hover:shadow-[0_0_30px_rgba(99,102,241,0.6)]
+                  transition-all duration-300
+                "
+              >
+                Register Now
+              </button>
+
+              <p className="text-xs text-gray-400 text-center">
+                Limited seats available
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Detail = ({ label, value }) => (
+  <div>
+    <p className="text-sm text-gray-400">{label}</p>
+    <p className="font-medium text-white">{value}</p>
+  </div>
+);
+
+export default EventDetails;
+///////////////////////////////////////////////////////////////////////////////
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { EVENTDATAS } from "../../Constants/ProgramData";
+import { BiLocationPlus } from "react-icons/bi";
+import { FaLocationDot } from "react-icons/fa6";
+
+const EventDetails = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [event, setEvent] = useState(null);
+
+  useEffect(() => {
+    const foundEvent = EVENTDATAS.find((e) => e.id === Number(id));
+    setEvent(foundEvent);
+  }, [id]);
+
+  const handleRegister = () => {
+    navigate(`/event/${event.id}/register`);
+  };
+
+  if (!event) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#020617] text-gray-400">
+        Loading event...
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#020617] text-white pt-20 pb-20 px-5">
+      <div className="max-w-7xl mx-auto">
+
+        {/* ================= HERO ================= */}
+        <div className="relative rounded-3xl overflow-hidden mb-16 mt-20">
+          <img
+            src={event.poster}
+            alt={event.eventName}
+            className="w-full h-[420px] object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+
+          <div className="absolute bottom-10 left-8 max-w-3xl">
+            <p className="text-blue-400 font-bold uppercase tracking-wide text-xl">
+              {event.programName}
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold mt-2">
+              {event.eventName}
+            </h1>
+            <p className="text-gray-300 mt-4">
+              {event.description}
+            </p>
+          </div>
+        </div>
+
+        {/* ================= CONTENT ================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+          {/* LEFT CONTENT */}
+          <div className="lg:col-span-2 space-y-10">
+
+            {/* ABOUT */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <h2 className="text-2xl font-semibold mb-4">About This Event</h2>
+              <p className="text-gray-300 leading-relaxed">
+                This event is organized by the <b>{event.department}</b> department
+                and coordinated by <b>{event.incharge}</b>.
+              </p>
+            </section>
+
+            {/* EVENT DETAILS */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <h2 className="text-2xl font-semibold mb-6">Event Details</h2>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <Detail label="Date" value={event.date} />
+                <Detail label="Time" value={`${event.startTime} - ${event.endTime}`} />
+                <Detail label="Venue" value={event.venue} />
+                <Detail label="Participant Limit" value={event.limit} />
+                <Detail label="Participation Type" value={event.participationType} />
+              </div>
+            </section>
+
+            {/* PARTICIPATION INFO */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <h2 className="text-2xl font-semibold mb-6">Participation Rules</h2>
+
+              {event.participationType === "individual" && (
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <Detail
+                    label="Overall Individual Limit"
+                    value={event.overallIndividualLimit}
+                  />
+                  <Detail
+                    label="Participants Per Department"
+                    value={event.departmentIndividualLimit}
+                  />
+                </div>
+              )}
+
+              {event.participationType === "team" && (
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <Detail
+                    label="Teams Per Department"
+                    value={event.teamsPerDepartment}
+                  />
+                  <Detail
+                    label="Members Per Team"
+                    value={event.membersPerTeamFromDepartment}
+                  />
+                </div>
+              )}
+            </section>
+
+            {/* PRICE IMAGE */}
+            {event.priceImage && (
+              <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+                <h2 className="text-2xl font-semibold mb-4">Prizes</h2>
+                <img
+                  src={event.priceImage}
+                  alt="Prize"
+                  className="w-full max-w-md rounded-xl"
+                />
+              </section>
+            )}
+
+            {/* SPONSORS */}
+            {event.sponsorImages && event.sponsorImages.length > 0 && (
+              <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+                <h2 className="text-2xl font-semibold mb-6">Sponsors</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                  {event.sponsorImages.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`Sponsor ${index + 1}`}
+                      className="h-24 object-contain bg-white rounded-xl p-3"
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* LOCATION */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <h2 className="text-2xl font-semibold">Location</h2>
+                <FaLocationDot className="text-xl text-blue-500" />
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-10 text-gray-300 mb-6">
+                <Detail label="Latitude" value={event.latitude} />
+                <Detail label="Longitude" value={event.longitude} />
+              </div>
+
+              <a
+                href={`https://www.google.com/maps?q=${event.latitude},${event.longitude}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:bg-blue-600/30 transition"
+              >
+                <BiLocationPlus className="text-lg" />
+                Open Location in Google Maps
+              </a>
+            </section>
+          </div>
+
+          {/* RIGHT CARD */}
+          <div className="relative">
+            <div className="sticky top-28 bg-gradient-to-br from-[#1E293B] to-[#020617] border border-white/10 rounded-3xl p-8 space-y-6 shadow-xl">
+              <h3 className="text-2xl font-semibold">Ready to Join?</h3>
+
+              <div className="space-y-3 text-gray-300 text-sm">
+                <p><span className="text-gray-400">Department:</span> {event.department}</p>
+                <p><span className="text-gray-400">In-charge:</span> {event.incharge}</p>
+                <p><span className="text-gray-400">Venue:</span> {event.venue}</p>
+              </div>
+
+              <button
+                onClick={handleRegister}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-lg hover:scale-[1.02] transition"
+              >
+                Register Now
+              </button>
+
+              <p className="text-xs text-gray-400 text-center">
+                Limited seats available
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Detail = ({ label, value }) => (
+  <div>
+    <p className="text-sm text-gray-400">{label}</p>
+    <p className="font-medium text-white">{value || "-"}</p>
+  </div>
+);
+
+export default EventDetails;

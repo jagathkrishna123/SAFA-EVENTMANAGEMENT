@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Hind:wght@300;400;500;600;700&family=Lexend+Deca:wght@100..900&display=swap");
+@import "tailwindcss";
+.font-out {
+  font-family: "Outfit", sans-serif;
+}
+
+.font-momo {
+  font-family: "Momo Trust Display", sans-serif;
+}
+
+.font-hind {
+  font-family: "Hind", sans-serif;
+}
+
+.font-lexend {
+  font-family: "Lexend Deca", sans-serif;
+}
+.font-ark {
+  font-family: "Archivo Black", sans-serif;
+}
+
+/* html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+} */
+
+/* Hide scrollbar but keep scrolling functionality */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* toast custom style............... */
+/* 
+.Toastify__toast {
+  background: #020617 !important;
+  color: #f8fafc !important;
+  border-radius: 14px !important;
+  font-family: "Raleway", sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.Toastify__toast--success {
+  border-left: 5px solid #22c55e;
+}
+
+.Toastify__toast-body {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.Toastify__progress-bar {
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+} */
+
+html,body {
+  overflow-x: hidden;
+}
+/* Base toast */
+.Toastify__toast {
+  background: rgba(15, 23, 42, 0.85) !important; /* slate-900 glass */
+  color: #e5e7eb !important;
+  border-radius: 12px !important;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  padding: 14px 16px;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Toast body */
+.Toastify__toast-body {
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Success (Blue) */
+.Toastify__toast--success svg {
+  fill: #3b82f6 !important; /* blue */
+}
+
+.Toastify__toast--error svg {
+  fill: #ef4444 !important; /* red */
+}
+
+/* Progress bar base */
+.Toastify__progress-bar {
+  height: 3px;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Success progress */
+.Toastify__toast--success .Toastify__progress-bar {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa); /* blue */
+}
+
+/* Error progress */
+.Toastify__toast--error .Toastify__progress-bar {
+  background: linear-gradient(90deg, #ef4444, #f87171); /* red */
+}
+
+/* Info */
+.Toastify__toast--info .Toastify__progress-bar {
+  background: linear-gradient(90deg, #6366f1, #818cf8);
+}
+
+/* Close button */
+.Toastify__close-button {
+  color: #9ca3af !important;
+  opacity: 0.7;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1;
+}
+
