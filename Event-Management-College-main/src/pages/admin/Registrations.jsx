@@ -147,7 +147,6 @@ const Registrations = () => {
                     <th className="px-8 py-5">Student Information</th>
                     <th className="px-8 py-5">Academic Info</th>
                     <th className="px-8 py-5">Contact Details</th>
-                    <th className="px-8 py-5 text-center">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
@@ -168,12 +167,6 @@ const Registrations = () => {
                       </td>
                       <td className="px-8 py-6">
                         <span className="text-gray-300 text-sm font-medium">{student.mobile}</span>
-                      </td>
-                      <td className="px-8 py-6 text-center">
-                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${student.regStatus === 'confirmed' ? 'bg-green-500/20 text-green-400 border border-green-500/20' : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/20'
-                          }`}>
-                          {student.regStatus || 'Pending'}
-                        </span>
                       </td>
                     </tr>
                   ))}

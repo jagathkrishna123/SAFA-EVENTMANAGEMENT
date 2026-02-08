@@ -26,7 +26,7 @@ const Attendence = () => {
         axios.get(`${API_BASE_URL}/events`),
         axios.get(`${API_BASE_URL}/attendance`),
         axios.get(`${API_BASE_URL}/registrations`),
-        axios.get(`${API_BASE_URL}/students`)
+        axios.get(`${API_BASE_URL}/users`)
       ]);
 
       setEvents(eventsRes.data);

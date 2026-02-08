@@ -25,7 +25,7 @@ const Attendence = () => {
       const [eventsRes, attRes, studentsRes] = await Promise.all([
         axios.get(`${API_BASE_URL}/events`),
         axios.get(`${API_BASE_URL}/attendance`),
-        axios.get(`${API_BASE_URL}/students`)
+        axios.get(`${API_BASE_URL}/users`)
       ]);
 
       const teacherEvents = eventsRes.data.filter(event =>
