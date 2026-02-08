@@ -61,6 +61,15 @@ const EventRegistration = () => {
         }
         setEvent(foundEvent);
 
+        // 2.5 Check if event is in the past
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const eventDate = new Date(foundEvent.date);
+        if (eventDate < today) {
+          setIsLimitReached(true);
+          setLimitMessage("This event has already occurred. Registration is closed.");
+        }
+
         // 3. Load Registrations
         const regsRes = await axios.get(`${API_BASE_URL}/registrations`);
         const allRegs = regsRes.data;
@@ -316,15 +325,17 @@ const EventRegistration = () => {
 
                             // Auto-lookup logic
                             if (index !== 0 && newRegNo.length > 5) {
-                              axios.get(`${API_BASE_URL}/students`)
+                              axios.get(`${API_BASE_URL}/users/lookup/${newRegNo}`)
                                 .then(res => {
-                                  const foundUser = res.data.find(u => u.registerNumber && u.registerNumber.toUpperCase() === newRegNo);
-                                  if (foundUser) {
-                                    handleMemberChange(index, "name", foundUser.name || "Verified Student");
+                                  if (res.data && res.data.name) {
+                                    handleMemberChange(index, "name", res.data.name);
                                   } else {
                                     handleMemberChange(index, "name", "");
                                   }
-                                }).catch(err => console.error(err));
+                                }).catch(err => {
+                                  console.error("Lookup error:", err);
+                                  handleMemberChange(index, "name", "");
+                                });
                             } else if (index !== 0) {
                               handleMemberChange(index, "name", "");
                             }

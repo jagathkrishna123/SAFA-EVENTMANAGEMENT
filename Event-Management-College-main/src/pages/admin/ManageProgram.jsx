@@ -123,7 +123,7 @@ const ManageProgram = () => {
                 currentItems.map((item) => (
                   <tr key={item.id} className="border-t border-white/10 hover:bg-white/5">
                     <td className="p-3">
-                      <div className="font-medium text-white">{item.Name || item.eventName}</div>
+                      <div className="font-medium text-white">{item.name || item.eventName}</div>
                       <div className="text-xs">{item.category}</div>
                     </td>
                     <td className="p-3 text-center">{item.programDate || item.date}</td>

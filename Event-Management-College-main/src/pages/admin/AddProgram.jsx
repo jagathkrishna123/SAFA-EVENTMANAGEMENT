@@ -57,12 +57,12 @@ const AddProgram = () => {
 
   useEffect(() => {
     if (existingProgram) {
-      setName(existingProgram.Name);
-      setTitle(existingProgram.Title);
+      setName(existingProgram.name);
+      setTitle(existingProgram.title);
       setCategory(existingProgram.category || "");
       setDate(existingProgram.programDate);
       setTime(existingProgram.programTime);
-      setDescription(existingProgram.Description);
+      setDescription(existingProgram.description);
       setFeatures(existingProgram.features || []);
       setImagePreview(existingProgram.image);
     }

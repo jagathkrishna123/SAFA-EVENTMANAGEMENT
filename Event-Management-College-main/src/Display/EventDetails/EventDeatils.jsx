@@ -73,6 +73,11 @@ const EventDetails = () => {
       return;
     }
 
+    if (isPastEvent()) {
+      toast.error("This event has already occurred. Registration is closed.");
+      return;
+    }
+
     if (isRegistered) {
       toast.info("Registration index already exists for your profile.");
       return;

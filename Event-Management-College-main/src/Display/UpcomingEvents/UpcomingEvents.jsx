@@ -127,7 +127,7 @@ export function UpcomingEvents() {
                             <div className="py-8 px-8 text-left flex flex-col gap-6">
                                 <div>
                                     <h3 className="font-sans font-black text-white text-2xl group-hover:text-blue-400 transition-colors duration-300 mb-2 leading-tight">
-                                        {item.Name || "Upcoming Event"}
+                                        {item.name || "Upcoming Event"}
                                     </h3>
                                     <div className="flex items-center gap-2">
                                         <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>

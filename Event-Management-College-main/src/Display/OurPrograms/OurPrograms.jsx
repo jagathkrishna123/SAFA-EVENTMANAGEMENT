@@ -160,12 +160,12 @@ const OurPrograms = () => {
                 <div className="w-full overflow-hidden rounded-t-2xl relative">
                   <img
                     src={item.image || "https://via.placeholder.com/400x300"}
-                    alt={item.Name}
+                    alt={item.name}
                     className="w-full h-48 md:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
 
                   <div className="absolute top-4 left-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm px-3 py-1 rounded-full font-semibold shadow-lg">
-                    {item.Name}
+                    {item.name}
                   </div>
                   <div className="absolute top-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded-full font-medium">
                     {item.category}
@@ -178,7 +178,7 @@ const OurPrograms = () => {
                   {/* TITLE */}
                   <div>
                     <h3 className="font-bold text-lg md:text-xl text-white mb-1">
-                      {item.Title}
+                      {item.title}
                     </h3>
                     <div className="flex items-center gap-4 text-sm text-gray-400">
                       <span className="flex items-center gap-1">
@@ -192,7 +192,7 @@ const OurPrograms = () => {
 
                   {/* DESCRIPTION */}
                   <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
-                    {(item.Description || "").substring(0, 150)}...
+                    {(item.description || "").substring(0, 150)}...
                   </p>
 
                   {/* FEATURES */}

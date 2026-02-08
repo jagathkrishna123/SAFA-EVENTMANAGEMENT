@@ -76,7 +76,7 @@ const ProgramDetails = () => {
         const link = document.createElement('a');
         link.href = showDetail.brochure;
         // Clean filename for different OS/browsers
-        const safeName = (showDetail.Name || 'Program').replace(/[^a-z0-9]/gi, '_');
+        const safeName = (showDetail.name || 'Program').replace(/[^a-z0-9]/gi, '_');
         link.setAttribute('download', `${safeName}_Brochure.pdf`);
         document.body.appendChild(link);
         link.click();
@@ -112,12 +112,12 @@ const ProgramDetails = () => {
 
           {/* Program Name */}
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-300 to-cyan-300 bg-clip-text text-transparent leading-tight">
-            {showDetail.Name}
+            {showDetail.name}
           </h1>
 
           {/* Program Title */}
           <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-10">
-            {showDetail.Title}
+            {showDetail.title}
           </p>
 
           {/* CTA Button */}
@@ -201,13 +201,13 @@ const ProgramDetails = () => {
             <div className="order-2 lg:order-1">
               <div className="mb-6">
                 <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-300 to-cyan-300 bg-clip-text text-transparent mb-6">
-                  About the {showDetail.Name}
+                  About the {showDetail.name}
                 </h2>
                 <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               </div>
               <div className="prose prose-lg prose-invert max-w-none">
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  {showDetail.Description}
+                  {showDetail.description}
                 </p>
                 <div className="flex flex-wrap gap-4 mt-8">
                   <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full">
@@ -235,7 +235,7 @@ const ProgramDetails = () => {
                 <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10">
                   <img
                     src={showDetail.image || "https://via.placeholder.com/600x400"}
-                    alt={showDetail.Name}
+                    alt={showDetail.name}
                     className="w-full h-80 md:h-96 object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -257,7 +257,7 @@ const ProgramDetails = () => {
         <div className="w-full max-w-7xl mx-auto mb-20 px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">
-              Events under {showDetail.Name}
+              Events under {showDetail.name}
             </h2>
             <p className="text-gray-400 text-lg">Discover exciting opportunities within this program</p>
           </div>

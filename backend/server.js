@@ -4,7 +4,8 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // In-memory OTP storage
 const otpStore = new Map(); // Key: registerNumber, Value: otp
@@ -236,6 +237,19 @@ app.post("/login", (req, res) => {
             res.json({ user: userWithoutPassword });
         } else {
             res.status(401).json({ error: "Invalid credentials" });
+        }
+    });
+});
+
+// Update lookup endpoint for team members
+app.get("/api/users/lookup/:regNo", (req, res) => {
+    const { regNo } = req.params;
+    db.get("SELECT name, registerNumber, department FROM users WHERE registerNumber = ?", [regNo.toUpperCase()], (err, row) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (row) {
+            res.json(row);
+        } else {
+            res.status(404).json({ error: "User not found" });
         }
     });
 });
@@ -646,16 +660,35 @@ app.post("/api/registrations", (req, res) => {
     stmt.finalize();
 });
 
-// Get registrations for a specific user
+// Get registrations for a specific user (including team memberships)
 app.get("/api/registrations/user/:userId", (req, res) => {
     const { userId } = req.params;
-    db.all("SELECT * FROM registrations WHERE userId = ?", [userId], (err, rows) => {
+
+    // First get the user's register number to search in teamData JSON
+    db.get("SELECT registerNumber FROM users WHERE id = ?", [userId], (err, userRecord) => {
         if (err) return res.status(500).json({ error: err.message });
-        const processed = rows.map(r => ({
-            ...r,
-            teamData: JSON.parse(r.teamData || "null")
-        }));
-        res.json(processed);
+
+        let query = "SELECT * FROM registrations WHERE userId = ?";
+        let params = [userId];
+
+        if (userRecord && userRecord.registerNumber) {
+            // Search in teamData JSON string for the register number
+            query = `
+                SELECT * FROM registrations 
+                WHERE userId = ? 
+                OR (participationType = 'team' AND teamData LIKE ?)
+            `;
+            params = [userId, `%${userRecord.registerNumber}%`];
+        }
+
+        db.all(query, params, (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            const processed = rows.map(r => ({
+                ...r,
+                teamData: JSON.parse(r.teamData || "null")
+            }));
+            res.json(processed);
+        });
     });
 });
 
